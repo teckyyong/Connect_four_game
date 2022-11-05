@@ -40,7 +40,7 @@ public class ConnectFourMain {
 
     // set current round
     cf.SetCurrRound(1);
-    // set current player 
+    // set current player
     if (player == "O") {
       cf.SetCurrPlayer(Disc.O_DISC);
     } else {
@@ -58,11 +58,70 @@ public class ConnectFourMain {
       o = all_player[1];
     }
 
-    displayer.ScoreBoard(o, x);
+    // * Run for {num_round} times
     int curr_round = cf.GetCurrRound();
-    displayer.ShowRound(curr_round);
-    Disc[][] grid = cf.GetGrid();
-    displayer.ShowGrid(grid);
+    while (curr_round <= num_Round) { // every round
+      displayer.ScoreBoard(o, x); // printed every round
+      displayer.ShowRound(curr_round);
+
+      // * Switch player for every turn
+      while (cf.IsGridFull() == false) { // while grid is not full
+        // * Get current player
+        Player curr_player = cf.GetCurrPlayer();
+        int disc_type = curr_player.GetDiscType();
+        String player_symbol;
+        if (disc_type == Disc.O_DISC) {
+          player_symbol = "O";
+        } else {
+          player_symbol = "X";
+        }
+
+        // * Get current grid and print grid
+        Disc[][] grid = cf.GetGrid(); // get
+        displayer.ShowGrid(grid); // print
+
+        // * Ask current player for input
+        int status = 0; // 0 is a dummy value
+        while (status != 1) { // while insert is unsuccessful
+          System.out.print("Player " + player_symbol + ", pick a column to insert your disc: ");
+          int insert_col = input.nextInt();
+          status = cf.Insert(insert_col);
+          if (status == -1) {
+            System.out.println("WARNING: Column " + insert_col + " is not available");
+          } else if (status == -2) {
+            System.out.println("WARNING: Column " + insert_col + " is invalid");
+          }
+
+        }
+
+        // * Check win
+        cf.HasRoundWinner();
+
+        // * Switch player
+        cf.SwitchPlayer();
+      }
+
+    }
+    // *print current score board
+    displayer.ScoreBoard(o, x);
+
+    // * print winner or tie
+    int status = cf.GetGameWinner();
+    if (status == -1) {
+      System.out.println("Tie");
+    } else { // status is 0 or 1, representing the position of winner at all_players[]
+      Player winner = all_player[status];
+      String player_symbol;
+      if (winner.GetDiscType() == Disc.O_DISC) {
+        player_symbol = "O";
+      } else if (winner.GetDiscType() == Disc.X_DISC) {
+        player_symbol = "X";
+      } else {
+        player_symbol = ""; // if neither is winner, which is impossible. means theres error in code, need
+                            // to debug
+      }
+      System.out.println("The final winner is Player " + player_symbol);
+    }
 
     input.close();
   }

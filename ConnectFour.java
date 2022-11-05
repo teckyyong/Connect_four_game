@@ -164,15 +164,15 @@ public class ConnectFour {
    * Returns false, if the grid is not full.
    */
   public boolean IsGridFull() {
-    for (int row = 0; row < grid.length ; row++) {
-      for (int col = 0; col < grid[row].length; col++) { 
-        if(grid[row][col] == null){
+    for (int row = 0; row < grid.length; row++) {
+      for (int col = 0; col < grid[row].length; col++) {
+        if (grid[row][col] == null) {
           return false;
-       }
+        }
 
       }
     }
-    return true; //returns true after checking all rows and all cols
+    return true; // returns true after checking all rows and all cols
   }
 
   /*
@@ -188,7 +188,22 @@ public class ConnectFour {
    * Returns -2, if the column is invalid.
    */
   public int Insert(int col) {
-    return 0; // Dummy return value.
+    int num_col = grid[0].length;
+    if (col < 1 || col > num_col) {
+      return -2;
+    }
+
+    col -= 1; // fixed
+    int discType = currPlayer.GetDiscType();
+    for (int row = grid.length - 1; row == 0; row--) {
+      if (grid[row][col] == null) {
+        grid[row][col] = new Disc(discType);
+        break;
+      } else if (row == 0) { // not null
+        return -1;
+      }
+    }
+    return 1;
   }
 
   /*
@@ -214,7 +229,11 @@ public class ConnectFour {
    * switches to O. If current player is O, then it switches to X)
    */
   public void SwitchPlayer() {
-
+    if (currPlayer == allPlayers[0]) {
+      currPlayer = allPlayers[1];
+    } else {
+      currPlayer = allPlayers[0];
+    }
   }
 
   /*
@@ -235,6 +254,17 @@ public class ConnectFour {
    * Returns -1,if there's a tie (same score)
    */
   public int GetGameWinner() {
-    return 0; // Dummy return value.
+    int max_score = allPlayers[0].GetScore();
+    int position = 0;
+    for (int i = 1; i < allPlayers.length; i++) {
+      if (allPlayers[i].GetScore() > max_score) { // if player at position 1 has higher score than player at position 0
+        max_score = allPlayers[i].GetScore();
+        position = i; // change to position 1
+      } else if(allPlayers[i].GetScore() == max_score) {  // tie
+        return -1;
+      }
+    }
+
+    return position; // return position with highest score
   }
 }
