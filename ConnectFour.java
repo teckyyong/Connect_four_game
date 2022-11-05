@@ -221,7 +221,12 @@ public class ConnectFour {
    * @return - The player's name, either "X" or "O"
    */
   public char GetCurrPlayerChar() {
-    return 's'; // Dummy return value.
+    if (currPlayer.GetDiscType() == Disc.O_DISC) {
+      return 'O';
+    } else  {
+      return 'X'; 
+    } 
+
   }
 
   /*

@@ -7,19 +7,25 @@ public class ConnectFourMain {
     Scanner input = new Scanner(System.in);
 
     int num_Round;
-    int choice;
+    int choice = 0;
     String player;
 
     displayer.GameHeader();
-    System.out.print("Round of games to play? ");
+    System.out.print("Round of games to play? "); // assume correct input
     num_Round = input.nextInt();
 
-    System.out.println("\nGrid Type?");
-    System.out.println("1. Default (6x7)");
-    System.out.println("2. Custom");
-    System.out.print("Choice: ");
-    choice = input.nextInt(); // checking.make sur echoice is either 1 or 2
-    // if choice != 1 or choice !=2
+    while (choice != 1 || choice != 2){
+      System.out.println("\nGrid Type?");
+      System.out.println("1. Default (6x7)");
+      System.out.println("2. Custom");
+      System.out.print("Choice: ");
+      choice = input.nextInt(); // checking. make sure echoice is either 1 or 2. // assume correct input
+      if (choice<=0 || choice > 2){
+        //print error
+      } 
+    }
+   
+   
 
     if (choice == 1) { // default
       cf = new ConnectFour(num_Round);
@@ -95,7 +101,7 @@ public class ConnectFourMain {
         }
 
         // * Check win
-        cf.HasRoundWinner();
+        // cf.HasRoundWinner();
 
         // * Switch player
         cf.SwitchPlayer();
