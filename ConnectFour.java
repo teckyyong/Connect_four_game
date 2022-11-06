@@ -35,8 +35,6 @@ public class ConnectFour {
     allPlayers[0] = player_o;
     allPlayers[1] = player_x;
 
-     // set current round
-    SetCurrRound(1);
   }
 
   /*
@@ -65,8 +63,6 @@ public class ConnectFour {
     allPlayers[0] = player_o;
     allPlayers[1] = player_x;
 
-     // set current round
-    SetCurrRound(1);
   }
 
   // ====================== PRIVATE METHOD =======================//
@@ -201,10 +197,10 @@ public class ConnectFour {
 
     col -= 1; // fixed
     int discType = currPlayer.GetDiscType();
-    for (int row =grid.length-1 ; row >= 0 ; row--) {
+    for (int row = grid.length - 1; row >= 0; row--) {
       if (grid[row][col] == null) {
         grid[row][col] = new Disc(discType);
-       break;
+        break;
       } else if (row == 0) { // not null
         return -1;
       }
@@ -229,9 +225,9 @@ public class ConnectFour {
   public char GetCurrPlayerChar() {
     if (currPlayer.GetDiscType() == Disc.O_DISC) {
       return 'O';
-    } else  {
-      return 'X'; 
-    } 
+    } else {
+      return 'X';
+    }
 
   }
 
@@ -254,6 +250,7 @@ public class ConnectFour {
    * Returns false, if there is no winner
    */
   public boolean HasRoundWinner() {
+
     return false; // Dummy return value.
   }
 
@@ -271,7 +268,7 @@ public class ConnectFour {
       if (allPlayers[i].GetScore() > max_score) { // if player at position 1 has higher score than player at position 0
         max_score = allPlayers[i].GetScore();
         position = i; // change to position 1
-      } else if(allPlayers[i].GetScore() == max_score) {  // tie
+      } else if (allPlayers[i].GetScore() == max_score) { // tie
         return -1;
       }
     }

@@ -43,7 +43,7 @@ public class ConnectFourMain {
     System.out.println("\n");
 
     // set current round
-    //cf.SetCurrRound(1);
+    cf.SetCurrRound(1);
     // set current player
     if (player == "O") {
       cf.SetCurrPlayer(0);
@@ -70,16 +70,6 @@ public class ConnectFourMain {
 
       // * Switch player for every turn
       while (cf.IsGridFull() == false) { // while grid is not full
-        // * Get current player
-        // Player curr_player = cf.GetCurrPlayer();
-        // int disc_type = curr_player.GetDiscType();
-        // String player_symbol;
-        // if (disc_type == Disc.O_DISC) {
-        //   player_symbol = "O";
-        // } else {
-        //   player_symbol = "X";
-        // }
-
         // * Get current grid and print grid
         Disc[][] grid = cf.GetGrid(); // get
         displayer.ShowGrid(grid); // print
@@ -104,6 +94,9 @@ public class ConnectFourMain {
         // * Switch player
         cf.SwitchPlayer();
       }
+      // move on to next round
+      curr_round += 1;
+      cf.SetCurrRound(curr_round);
 
     }
     // *print current score board
