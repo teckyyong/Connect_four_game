@@ -89,7 +89,7 @@ public class ConnectFourMain {
         }
 
         // * Check win
-        // cf.HasRoundWinner();
+        cf.HasRoundWinner();
 
         // * Switch player
         cf.SwitchPlayer();
