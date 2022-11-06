@@ -49,9 +49,9 @@ public class Displayer {
           System.out.print("|   ");
         }
         else if(grid[row][col].GetDiscType() == Disc.O_DISC){
-          System.out.print(" O ");
+          System.out.print("| O ");
         }else{  // (grid[row][col].GetDiscType() == Disc.X_DISC)
-          System.out.print(" X ");
+          System.out.print("| X ");
         }
 
         if (col == grid[row].length-1){
@@ -64,7 +64,7 @@ public class Displayer {
         for(int i=1 ; i<= num_col ; i++){
           System.out.print("  "+ i+ " " );
         }
-
+        System.out.println("");
        }
 
       }
