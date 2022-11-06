@@ -283,7 +283,7 @@ public class ConnectFour {
     return false;
   }
 
-  private static boolean Check(char ch){
+  private boolean Check(char ch){
       //creates flag
       boolean flag = true;
 
@@ -311,7 +311,7 @@ public class ConnectFour {
                     counter = 0; // if next piece is not an O, set counter to 0
                 }
                 if(counter >= 4){
-                    System.out.println("Player" + ch + "wins"); //if counter is greater or equal to 4, player wins
+                    System.out.println("Round " + GetCurrRound() + "winner is Player" + ch ); //if counter is greater or equal to 4, player wins
                     flag = false;
                 }
             }
