@@ -104,6 +104,7 @@ public class ConnectFourMain {
           System.out.println("Click 'Enter' to continue next round.");
           input.nextLine();
           cf.SwitchPlayer();
+          cf.ResetGrid();
         }
 
       }

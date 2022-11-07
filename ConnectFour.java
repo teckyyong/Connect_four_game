@@ -74,6 +74,11 @@ public class ConnectFour {
 
   // ====================== PRIVATE METHOD =======================//
   /* (PLACE YOUR PRIVATE METHODS HERE) */
+    /*
+   *   Check for vertical strike
+   * 
+   * returns true if a vertical 4-strike exists, else returns false
+   */
   private boolean CheckVertical() {
     char player_char = GetCurrPlayerChar(); // "X" or "O"
     int player_disc = currPlayer.GetDiscType(); // 1 or 0
@@ -100,6 +105,11 @@ public class ConnectFour {
     return false;
   }
 
+    /*
+   * Check for horizontal strike
+   * 
+   * returns true if a horizontal 4-strike exists, else returns false
+   */
   private boolean CheckHorizontal() {
     char player_char = GetCurrPlayerChar();
     int player_disc = currPlayer.GetDiscType();
@@ -177,7 +187,9 @@ public class ConnectFour {
     return width;
   }
 
-  /* Resets the grid so it contains nothing */
+  /* 
+  * Resets the grid so it contains nothing 
+  */
   public void ResetGrid() {
     grid = new Disc[height][width];
 
