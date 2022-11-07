@@ -45,7 +45,7 @@ public class ConnectFourMain {
     // set current round
     cf.SetCurrRound(1);
     // set current player
-    if (player== "O") {
+    if (player.equals("O")) {
       System.out.println("here");
       cf.SetCurrPlayer(0);
     } else {
