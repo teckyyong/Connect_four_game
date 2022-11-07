@@ -34,7 +34,7 @@ public class ConnectFourMain {
       System.out.print("Please enter custom width: ");
       width = input.nextInt();
 
-      cf = new ConnectFour(num_Round, height, width);
+      cf = new ConnectFour(num_Round, height, width); 
     }
 
     System.out.print("Who will start first (O or X)? ");
@@ -51,19 +51,20 @@ public class ConnectFourMain {
       cf.SetCurrPlayer(1);
     }
 
-    Player[] all_player = cf.GetAllPlayers();
+    Player[] all_player = cf.GetAllPlayers();   // store all player object into all_player
     Player o;
     Player x;
-    if (all_player[0].GetDiscType() == Disc.O_DISC) {
+     // find the positions of player O and X in all_player[]
+    if (all_player[0].GetDiscType() == Disc.O_DISC) { // if player O is in position 0, then player X is in position 1. 
       o = all_player[0];
       x = all_player[1];
-    } else {
+    } else {  // otherwise, player O is obviosuly in position 1, then player X is in position 0.
       x = all_player[0];
       o = all_player[1];
     }
 
-    // * Run for {num_round} times
-    int curr_round = cf.GetCurrRound();
+    // * Run for (num_round) times
+    int curr_round = cf.GetCurrRound(); // get curr_round number
     while (curr_round <= num_Round) { // every round
       displayer.ScoreBoard(o, x); // printed every round
       displayer.ShowRound(curr_round);
@@ -91,19 +92,18 @@ public class ConnectFourMain {
         // * Check win
         boolean is_round_winner = cf.HasRoundWinner();
 
-        if (is_round_winner) {
+        if (is_round_winner) {  // if there's a winner for current round
           char round_winner = cf.GetCurrPlayerChar();
           int points = cf.NumAvailBlock();
-          System.out.println(round_winner + " will get " + points + " points\n\n");
+          System.out.println("PLayer "+ round_winner + " will get " + points + " points\n\n");
           break; // break the inner loop, go to next round
         }
-        else if (cf.IsGridFull() == true) {
+        else if (cf.IsGridFull() == true) { // if grid is full
           System.out.println("Round " + curr_round + " is a tie. Grid is full.");
           break; // break the inner loop, go to next round
-        } else { // * Switch player
+        } else { // if no winner yet and grid is not full
           System.out.println("Click 'Enter' to continue next round.");
-          //input.nextLine();
-          cf.SwitchPlayer();
+          cf.SwitchPlayer();  // switch player cause its the other player's turn
          
         }
 

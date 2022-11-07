@@ -1,9 +1,3 @@
-/**
- * Code Reference:
- * https://codereview.stackexchange.com/questions/100917/connect-four-game-in-java
- * 
- */
-
 /*
  * The game that keeps track of all the information, such as
  * the grid and which player's turn
@@ -24,23 +18,23 @@ public class ConnectFour {
   public ConnectFour(int numRounds) {
     // Instantiate the grid when ConnectFour object is constructed.
     // Use default values.
-    grid = new Disc[DEFAULT_HEIGHT][DEFAULT_WIDTH];
+    grid = new Disc[DEFAULT_HEIGHT][DEFAULT_WIDTH]; 
     height = DEFAULT_HEIGHT;
     width = DEFAULT_WIDTH;
     this.numRounds = numRounds;
     // currRound = 1;
 
-    Disc disc_o = new Disc(Disc.O_DISC);
-    int disc0 = disc_o.GetDiscType();
-    Player player_o = new Player(disc0);
+    Disc disc_o = new Disc(Disc.O_DISC);  // Create Disc object for 'O'
+    int disc0 = disc_o.GetDiscType(); // get the integer for Disc object
+    Player player_o = new Player(disc0); // create Player using the integer
 
-    Disc disc_x = new Disc(Disc.X_DISC);
-    int discx = disc_x.GetDiscType();
-    Player player_x = new Player(discx);
+    Disc disc_x = new Disc(Disc.X_DISC); // Create Disc object for 'X'
+    int discx = disc_x.GetDiscType(); // get the integer for Disc object
+    Player player_x = new Player(discx); // create Player using the integer
 
     allPlayers = new Player[2];
-    allPlayers[0] = player_o;
-    allPlayers[1] = player_x;
+    allPlayers[0] = player_o; //player O is at pos 0 of the allplayers array
+    allPlayers[1] = player_x; //player X is at pos 1 of the allplayers array
 
   }
 
@@ -56,19 +50,18 @@ public class ConnectFour {
     this.height = height;
     this.width = width;
     this.numRounds = numRounds;
-    // currRound = 1;
 
-    Disc disc_o = new Disc(Disc.O_DISC);
-    int disc0 = disc_o.GetDiscType();
-    Player player_o = new Player(disc0);
+    Disc disc_o = new Disc(Disc.O_DISC);  // Create Disc object for 'O'
+    int disc0 = disc_o.GetDiscType(); // get the integer for Disc object
+    Player player_o = new Player(disc0);  // create Player using the integer 
 
-    Disc disc_x = new Disc(Disc.X_DISC);
-    int discx = disc_x.GetDiscType();
-    Player player_x = new Player(discx);
+    Disc disc_x = new Disc(Disc.X_DISC);  // Create Disc object for 'X'
+    int discx = disc_x.GetDiscType();   // get the integer for Disc object
+    Player player_x = new Player(discx); // create Player using the integer
 
     allPlayers = new Player[2];
-    allPlayers[0] = player_o;
-    allPlayers[1] = player_x;
+    allPlayers[0] = player_o; //player O is at pos 0 of the allplayers array
+    allPlayers[1] = player_x; //player X is at pos 1 of the allplayers array
 
   }
 
@@ -232,7 +225,7 @@ public class ConnectFour {
    * Returns false, if the grid is not full.
    */
   public boolean IsGridFull() {
-    for (int row = 0; row < grid.length; row++) {
+    for (int row = 0; row < grid.length; row++) { 
       for (int col = 0; col < grid[row].length; col++) {
         if (grid[row][col] == null) {
           return false;
