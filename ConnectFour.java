@@ -96,7 +96,7 @@ public class ConnectFour {
         }
 
         if (counter >= 4) { // once there's 4 strike, winner is found, return true.
-          System.out.println("Round " + GetCurrRound() + "winner is Player " + player_char);
+          System.out.println("Round " + GetCurrRound() + " winner is Player " + player_char);
 
           return true;
         }
@@ -124,7 +124,7 @@ public class ConnectFour {
           counter++; // counter += 1
         }
         if (counter >= 4) {// once there's 4 strike, winner is found, return true.
-          System.out.println("Round " + GetCurrRound() + "winner is Player " + player_char);
+          System.out.println("Round " + GetCurrRound() + " winner is Player " + player_char);
           return true;
         }
       }

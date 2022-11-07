@@ -16,6 +16,6 @@ public class Disc {
    * @return - Return the type of disc. Values are based on 
    *           Global variables within Disc class */
   public int GetDiscType() {
-    return discType;   // Dummy return value.
+    return discType;   
   }
 }

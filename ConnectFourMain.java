@@ -46,7 +46,6 @@ public class ConnectFourMain {
     cf.SetCurrRound(1);
     // set current player
     if (player.equals("O")) {
-      System.out.println("here");
       cf.SetCurrPlayer(0);
     } else {
       cf.SetCurrPlayer(1);
@@ -95,23 +94,24 @@ public class ConnectFourMain {
         if (is_round_winner) {
           char round_winner = cf.GetCurrPlayerChar();
           int points = cf.NumAvailBlock();
-          System.out.println(round_winner + " will get " + points + " points");
+          System.out.println(round_winner + " will get " + points + " points\n\n");
+          break; // break the inner loop, go to next round
         }
-
         else if (cf.IsGridFull() == true) {
           System.out.println("Round " + curr_round + " is a tie. Grid is full.");
+          break; // break the inner loop, go to next round
         } else { // * Switch player
           System.out.println("Click 'Enter' to continue next round.");
           //input.nextLine();
           cf.SwitchPlayer();
-          cf.ResetGrid();
+         
         }
 
       }
       // move on to next round
       curr_round += 1;
       cf.SetCurrRound(curr_round);
-
+      cf.ResetGrid();
     }
     // *print current score board
     displayer.ScoreBoard(o, x);

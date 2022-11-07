@@ -15,13 +15,13 @@ public class Player {
   /* Gets the player's disc type (0 or 1)
    * @return - The value of the disc type */
   public int GetDiscType() {
-    return discType;   // Dummy return value.
+    return discType;  
   }
   
   /* Gets the players score 
    * @return - The player's score */
   public int GetScore() {
-    return score;   // Dummy return value.
+    return score;   
   }
   
   /* Add scores to the player's exiting score
