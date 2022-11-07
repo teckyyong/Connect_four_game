@@ -1,11 +1,13 @@
 /**
- * Code Reference: https://codereview.stackexchange.com/questions/100917/connect-four-game-in-java
+ * Code Reference:
+ * https://codereview.stackexchange.com/questions/100917/connect-four-game-in-java
  * 
  */
 
-
-/* The game that keeps track of all the information, such as
- * the grid and which player's turn */
+/*
+ * The game that keeps track of all the information, such as
+ * the grid and which player's turn
+ */
 public class ConnectFour {
   public final static int DEFAULT_HEIGHT = 6; // The default height of the grid (DO NOT CHANGE)
   public final static int DEFAULT_WIDTH = 7; // The default width of the grid (DO NOT CHANGE)
@@ -15,7 +17,6 @@ public class ConnectFour {
   private Player currPlayer; // Keeps track of the current player
   private int numRounds; // Keep track of number of rounds to play
   private int currRound; // Keep track of the current round
-
   private int height, width; // height and width of the grid
 
   // ======================= CONSTRUCTOR =======================//
@@ -73,6 +74,53 @@ public class ConnectFour {
 
   // ====================== PRIVATE METHOD =======================//
   /* (PLACE YOUR PRIVATE METHODS HERE) */
+  private boolean CheckVertical() {
+    char player_char = GetCurrPlayerChar(); // "X" or "O"
+    int player_disc = currPlayer.GetDiscType(); // 1 or 0
+
+    for (int col = 0; col < GetGridWidth(); col++) { // for each column left to right
+      int counter = 0; // to keep track of the number of strike
+      for (int row = GetGridHeight() - 1; row >= 0; row--) { // check from bottom to top
+        if (grid[row][col] == null) { // if null, then go to next column
+          break;
+        } else if (grid[row][col].GetDiscType() == player_disc) { // if is the current player's disctype, its a
+                                                                  // potential strike
+          counter++; // so start counting strike
+        } else { // if is opponent's disctype, reset back to 0 and start counting again
+          counter = 0;
+        }
+
+        if (counter >= 4) { // once there's 4 strike, winner is found, return true.
+          System.out.println("Round " + GetCurrRound() + "winner is Player " + player_char);
+
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  private boolean CheckHorizontal() {
+    char player_char = GetCurrPlayerChar();
+    int player_disc = currPlayer.GetDiscType();
+
+    for (int row = GetGridHeight() - 1; row >= 0; row--) { // for every row from bottom to top
+      int counter = 0;
+      for (int col = 0; col < GetGridWidth(); col++) { // check every column from left ot right
+        if ((grid[row][col] == null) || (grid[row][col].GetDiscType() != player_disc)) { // if null or opponents
+                                                                                         // discType
+          counter = 0; // counter resets to 0
+        } else if (grid[row][col].GetDiscType() == player_disc) { // if is the current player's disctype
+          counter++; // counter += 1
+        }
+        if (counter >= 4) {// once there's 4 strike, winner is found, return true.
+          System.out.println("Round " + GetCurrRound() + "winner is Player " + player_char);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   // ====================== PUBLIC METHOD =======================//
   /*
@@ -221,19 +269,15 @@ public class ConnectFour {
    */
   public int NumAvailBlock() {
     // check number of empty block
-    int count = 0
-    for (row){
-      for (col){
-        if (grid[row][col] == null){
+    int count = 0;
+    for (int row = 0; row < grid.length; row++) {
+      for (int col = 0; col < grid[row].length; col++) {
+        if (grid[row][col] == null) {
           count += 1;
         }
-
       }
     }
-
-
-
-    return count; // Dummy return value.
+    return count;
   }
 
   /*
@@ -269,12 +313,15 @@ public class ConnectFour {
    * Returns false, if there is no winner
    */
   public boolean HasRoundWinner() {
-    boolean is_curr_player_win = Check(GetCurrPlayerChar());
+    boolean is_curr_player_win;
+    if ((CheckVertical() == true) || (CheckHorizontal() == true)) {
+      is_curr_player_win = true;
+    }else{
+      is_curr_player_win = false;
+    }
     
-
-
     // calculate score
-    if (is_curr_player_win){
+    if (is_curr_player_win == true) {
       int num_empty = NumAvailBlock();
       currPlayer.AddScore(num_empty);
       return true;
@@ -282,44 +329,6 @@ public class ConnectFour {
 
     return false;
   }
-
-  private boolean Check(char ch){
-      //creates flag
-      boolean flag = true;
-
-      //checks all Xs at once, for clearner main loop
-      if(!CheckVertical(ch) || !CheckHorizontal(ch)|| !CheckDiagonalBack(ch)|| !CheckDiagonalForward(ch)){
-          flag = false;
-      }
-      return flag;
-  }
-
-  private boolean CheckVertical(char ch){
-    //creates boolean to act as flag
-    boolean flag = true;
-
-    //creates counter
-    int counter = 0;
-    while(flag == true){
-
-        //goes through board vertically
-        for(int h = 0; GetGridHeight() > h; h += 1){
-            for(int w = 0; GetGridWidth() > w; w += 1){
-                if(grid[w][h] == ch){ //if it finds an O, add 1 to counter
-                    counter += 1;
-                }else{
-                    counter = 0; // if next piece is not an O, set counter to 0
-                }
-                if(counter >= 4){
-                    System.out.println("Round " + GetCurrRound() + "winner is Player" + ch ); //if counter is greater or equal to 4, player wins
-                    flag = false;
-                }
-            }
-        }
-        break;
-    }
-    return flag;
-}
 
   /*
    * Determine the final winner by checking the player's score.

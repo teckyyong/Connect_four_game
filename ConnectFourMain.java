@@ -35,7 +35,7 @@ public class ConnectFourMain {
       width = input.nextInt();
 
       cf = new ConnectFour(num_Round, height, width);
-    } 
+    }
 
     System.out.print("Who will start first (O or X)? ");
     input.nextLine();
@@ -45,7 +45,8 @@ public class ConnectFourMain {
     // set current round
     cf.SetCurrRound(1);
     // set current player
-    if (player == "O") {
+    if (player== "O") {
+      System.out.println("here");
       cf.SetCurrPlayer(0);
     } else {
       cf.SetCurrPlayer(1);
@@ -89,10 +90,22 @@ public class ConnectFourMain {
         }
 
         // * Check win
-        cf.HasRoundWinner();
+        boolean is_round_winner = cf.HasRoundWinner();
 
-        // * Switch player
-        cf.SwitchPlayer();
+        if (is_round_winner) {
+          char round_winner = cf.GetCurrPlayerChar();
+          int points = cf.NumAvailBlock();
+          System.out.println(round_winner + " will get " + points + " points");
+        }
+
+        else if (cf.IsGridFull() == true) {
+          System.out.println("Round " + curr_round + " is a tie. Grid is full.");
+        } else { // * Switch player
+          System.out.println("Click 'Enter' to continue next round.");
+          input.nextLine();
+          cf.SwitchPlayer();
+        }
+
       }
       // move on to next round
       curr_round += 1;
@@ -105,7 +118,7 @@ public class ConnectFourMain {
     // * print winner or tie
     int status = cf.GetGameWinner();
     if (status == -1) {
-      System.out.println("Round "+ num_Round + "is a tie");
+      System.out.println("Round " + num_Round + "is a tie");
     } else { // status is 0 or 1, representing the position of winner at all_players[]
       Player winner = all_player[status];
       String player_symbol;
