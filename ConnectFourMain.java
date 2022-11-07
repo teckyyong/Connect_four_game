@@ -102,7 +102,7 @@ public class ConnectFourMain {
           System.out.println("Round " + curr_round + " is a tie. Grid is full.");
         } else { // * Switch player
           System.out.println("Click 'Enter' to continue next round.");
-          input.nextLine();
+          //input.nextLine();
           cf.SwitchPlayer();
           cf.ResetGrid();
         }
